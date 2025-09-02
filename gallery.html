@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie - Tante Paula Concept Store</title>
+    <meta name="description" content="Entdecken Sie unsere vollständige Kollektion von Wohnaccessoires, Dekoration und Mode in der Tante Paula Galerie.">
+    <meta property="og:title" content="Galerie - Tante Paula Concept Store">
+    <meta property="og:description" content="Entdecken Sie unsere vollständige Kollektion von Wohnaccessoires, Dekoration und Mode.">
+    <meta property="og:image" content="https://bei-tante-paula.de/images/pic-3.png">
+    <link rel="canonical" href="https://bei-tante-paula.de/gallery">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Tante Paula" />
+    <link rel="manifest" href="/images/site.webmanifest" />
+    <link rel="icon" href="/images/logo.png" type="image/x-icon">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+    
+    <header class="header" id="header">
+        <nav class="nav container">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="/images/logo.png" alt="Tante Paula Logo" class="logo">
+                </a>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">Über Uns</a></li>
+                <li><a href="gallery.html" class="nav-link active">Galerie</a></li>
+                <li><a href="contact.html" class="nav-link">Kontakt</a></li>
+            </ul>
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Menü öffnen" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </nav>
+    </header>
+    
+    <div class="mobile-sidebar" id="mobile-sidebar" aria-hidden="true">
+        <div class="mobile-sidebar-content">
+            <button class="mobile-sidebar-close" id="mobile-sidebar-close" aria-label="Menü schließen">
+                <i data-lucide="x"></i>
+            </button>
+            <nav class="mobile-nav">
+                <a href="index.html" class="mobile-nav-link">Home</a>
+                <a href="about.html" class="mobile-nav-link">Über Uns</a>
+                <a href="gallery.html" class="mobile-nav-link active">Galerie</a>
+                <a href="contact.html" class="mobile-nav-link">Kontakt</a>
+            </nav>
+            <div class="mobile-sidebar-footer">
+                <div class="social-links">
+                    <a href="https://www.instagram.com/beitantepaula/" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main id="main-content" style="margin-top: 80px;">
+        <section class="page-hero section">
+            <div class="container">
+                <div class="page-hero-content" data-aos="fade-up">
+                    <h1>Unsere Galerie</h1>
+                    <p class="page-hero-subtitle">Entdecken Sie unsere vollständige Kollektion sorgfältig ausgewählter Stücke</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="full-gallery section">
+            <div class="container">
+                <div class="gallery-masonry" id="gallery-grid">
+                    <div class="gallery-item tall" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop" alt="Vintage Keramik Vase" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3>Vintage Keramik Vase</h3>
+                            <p>Handgemacht in Portugal</p>
+                            <span class="gallery-category">Dekoration</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item wide" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Handgemachte Kerzen" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3>Soja-Kerzen Set</h3>
+                            <p>Mit natürlichen Düften</p>
+                            <span class="gallery-category">Dekoration</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                        <img src="https://images.pexels.com/photos/1040173/pexels-photo-1040173.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop" alt="Vintage Wandspiegel" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3>Vintage Wandspiegel</h3>
+                            <p>Messing-Rahmen, 1960er Jahre</p>
+                            <span class="gallery-category">Dekoration</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item tall" data-aos="fade-up" data-aos-delay="400">
+                        <img src="https://images.pexels.com/photos/1571457/pexels-photo-1571457.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Bio-Leinenkissen" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3>Bio-Leinenkissen</h3>
+                            <p>Verschiedene Farben verfügbar</p>
+                            <span class="gallery-category">Accessoires</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item wide" data-aos="fade-up" data-aos-delay="500">
+                        <img src="https://images.pexels.com/photos/2762247/pexels-photo-2762247.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop" alt="Keramik Schalen Set" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3>Keramik Schalen Set</h3>
+                            <p>Perfekt für das Frühstück</p>
+                            <span class="gallery-category">Accessoires</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
+                        <img src="https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Holz Serviertablett" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3>Holz Serviertablett</h3>
+                            <p>Aus nachhaltigem Bambus</p>
+                            <span class="gallery-category">Accessoires</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item tall" data-aos="fade-up" data-aos-delay="700">
+                        <img src="https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop" alt="Nachhaltige Strickjacke" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3>Bio-Baumwolle Cardigan</h3>
+                            <p>Fair produziert in Deutschland</p>
+                            <span class="gallery-category">Mode</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="800">
+                        <img src="https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop" alt="Linen Scarf" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3>Leinen Schal</h3>
+                            <p>Handgewebt in Italien</p>
+                            <span class="gallery-category">Mode</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item wide" data-aos="fade-up" data-aos-delay="900">
+                        <img src="https://images.pexels.com/photos/1571464/pexels-photo-1571464.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Abstrakte Wandkunst" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3>Abstrakte Wandkunst</h3>
+                            <p>Von lokalen Künstlern</p>
+                            <span class="gallery-category">Kunst</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item tall" data-aos="fade-up" data-aos-delay="1000">
+                        <img src="https://images.pexels.com/photos/2883049/pexels-photo-2883049.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop" alt="Skulptur" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3>Keramik Skulptur</h3>
+                            <p>Moderne Interpretation klassischer Formen</p>
+                            <span class="gallery-category">Kunst</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="1100">
+                        <img src="https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop" alt="Pflanzenständer" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3>Messing Pflanzenständer</h3>
+                            <p>Vintage Design der 70er Jahre</p>
+                            <span class="gallery-category">Dekoration</span>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item wide" data-aos="fade-up" data-aos-delay="1200">
+                        <img src="https://images.pexels.com/photos/1484759/pexels-photo-1484759.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Wandregale" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <h3>Schwimmende Wandregale</h3>
+                            <p>Aus zertifiziertem Eichenholz</p>
+                            <span class="gallery-category">Dekoration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-labelledby="lightbox-title">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightbox-close" aria-label="Lightbox schließen">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="lightbox-image-container">
+                <img id="lightbox-image" src="" alt="">
+            </div>
+            <div class="lightbox-info">
+                <h3 id="lightbox-title"></h3>
+                <p id="lightbox-description"></p>
+                <span id="lightbox-category" class="lightbox-category"></span>
+            </div>
+            <div class="lightbox-navigation">
+                <button class="lightbox-nav-btn" id="lightbox-prev" aria-label="Vorheriges Bild">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <button class="lightbox-nav-btn" id="lightbox-next" aria-label="Nächstes Bild">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer" data-aos="fade-up">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Tante Paula</h3>
+                    <p>Ihr Concept Store für besondere Wohnaccessoires und nachhaltige Mode in Potsdam.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/beitantepaula/" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                        
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="about.html">Über Uns</a></li>
+                        <li><a href="gallery.html">Galerie</a></li>
+                        <li><a href="contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-legal">
+                    <h4>Rechtliches</h4>
+                    <ul>
+                        <li><a href="impressum.html">Impressum</a></li>
+                        <li><a href="privacy.html">Datenschutz</a></li>
+                        <li><a href="cookies.html">Cookie-Richtlinie</a></li>
+                    </ul>
+									</div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tante Paula. Alle Rechte vorbehalten.</p>
+                <a href="#" class="back-to-top" id="back-to-top" aria-label="Nach oben">
+                    <i data-lucide="arrow-up"></i></a>
+										<p class="credit">Réalisé par 
+                        <a href="https://huhpact.dev?utm_source=tantepaula&utm_medium=webbrowser&utm_campaign=tantepaula">
+                        <img class="img__credit" src="https://huhpact.dev/s/logo-huhpact.png" alt="huh(pact)">
+                    </a>
+                </p>
+                
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .page-hero {
+            background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-lavender) 100%);
+            text-align: center;
+        }
+        
+        .page-hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--color-gray-800);
+            margin-bottom: var(--space-md);
+        }
+        
+        .page-hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .gallery-masonry {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-auto-rows: 250px;
+            gap: var(--space-xl);
+            padding: var(--space-xl) 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            background: var(--color-white);
+        }
+        
+        .gallery-item.tall {
+            grid-row: span 2;
+        }
+        
+        .gallery-item.wide {
+            grid-column: span 2;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+        
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: var(--color-white);
+            padding: var(--space-2xl) var(--space-lg) var(--space-lg) var(--space-lg);
+            transform: translateY(100%);
+            transition: transform var(--transition-normal);
+        }
+        
+        .gallery-item:hover .gallery-item-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-item-overlay h3 {
+            font-size: 1.375rem;
+            margin-bottom: var(--space-xs);
+            color: var(--color-white);
+            font-weight: 600;
+        }
+        
+        .gallery-item-overlay p {
+            font-size: 1rem;
+            margin-bottom: var(--space-md);
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+        
+        .gallery-category {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-xl);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        /* Lightbox Styles */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: var(--z-modal);
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-normal);
+        }
+        
+        .lightbox.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .lightbox-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .lightbox-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            height: 90%;
+            margin: 5% auto;
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: var(--color-white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1;
+            transition: all var(--transition-normal);
+        }
+        
+        .lightbox-close:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: scale(1.1);
+        }
+        
+        .lightbox-image-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg);
+        }
+        
+        .lightbox-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: var(--radius-md);
+        }
+        
+        .lightbox-info {
+            background: var(--color-gray-50);
+            padding: var(--space-xl);
+            text-align: center;
+        }
+        
+        .lightbox-info h3 {
+            color: var(--color-gray-800);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .lightbox-info p {
+            color: var(--color-gray-600);
+            margin-bottom: var(--space-md);
+        }
+        
+        .lightbox-category {
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-xl);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .lightbox-navigation {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 var(--space-lg);
+            pointer-events: none;
+        }
+        
+        .lightbox-nav-btn {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: var(--color-white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            pointer-events: all;
+        }
+        
+        .lightbox-nav-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: scale(1.1);
+        }
+        
+        .lightbox-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-masonry {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 280px;
+                gap: var(--space-lg);
+            }
+            
+            .gallery-item.tall,
+            .gallery-item.wide {
+                grid-row: span 1;
+                grid-column: span 1;
+            }
+            
+            .lightbox-content {
+                width: 95%;
+                height: 95%;
+                margin: 2.5% auto;
+            }
+            
+            .lightbox-navigation {
+                display: none;
+            }
+        }
+    </style>
+
+    <script>
+        class GalleryApp {
+            constructor() {
+                this.galleryItems = [];
+                this.currentLightboxIndex = 0;
+                this.init();
+            }
+            
+            init() {
+                this.galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+                this.setupLightbox();
+            }
+            
+            setupLightbox() {
+                const lightbox = document.getElementById('lightbox');
+                const lightboxClose = document.getElementById('lightbox-close');
+                const lightboxPrev = document.getElementById('lightbox-prev');
+                const lightboxNext = document.getElementById('lightbox-next');
+                const galleryItems = document.querySelectorAll('.gallery-item');
+                
+                galleryItems.forEach((item, index) => {
+                    item.addEventListener('click', () => {
+                        this.openLightbox(index);
+                    });
+                    
+                    item.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.openLightbox(index);
+                        }
+                    });
+                    
+                    item.setAttribute('tabindex', '0');
+                    item.setAttribute('role', 'button');
+                    item.setAttribute('aria-label', `Bild öffnen: ${item.querySelector('h3')?.textContent || 'Gallery item'}`);
+                });
+                
+                lightboxClose.addEventListener('click', this.closeLightbox.bind(this));
+                lightbox.querySelector('.lightbox-backdrop').addEventListener('click', this.closeLightbox.bind(this));
+                
+                lightboxPrev.addEventListener('click', this.showPrevious.bind(this));
+                lightboxNext.addEventListener('click', this.showNext.bind(this));
+                
+                document.addEventListener('keydown', this.handleLightboxKeyboard.bind(this));
+            }
+            
+            openLightbox(index) {
+                this.currentLightboxIndex = index;
+                const item = this.galleryItems[index];
+                const lightbox = document.getElementById('lightbox');
+                
+                this.updateLightboxContent(item);
+                lightbox.classList.add('open');
+                lightbox.setAttribute('aria-hidden', 'false');
+                
+                document.getElementById('lightbox-close').focus();
+                
+                document.body.classList.add('no-scroll');
+            }
+            
+            closeLightbox() {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('open');
+                lightbox.setAttribute('aria-hidden', 'true');
+                
+                document.body.classList.remove('no-scroll');
+                
+                this.galleryItems[this.currentLightboxIndex]?.focus();
+            }
+            
+            updateLightboxContent(item) {
+                const img = item.querySelector('img');
+                const overlay = item.querySelector('.gallery-item-overlay');
+                
+                const lightboxImage = document.getElementById('lightbox-image');
+                const lightboxTitle = document.getElementById('lightbox-title');
+                const lightboxDescription = document.getElementById('lightbox-description');
+                const lightboxCategory = document.getElementById('lightbox-category');
+                
+                lightboxImage.src = img.src;
+                lightboxImage.alt = img.alt;
+                
+                if (overlay) {
+                    lightboxTitle.textContent = overlay.querySelector('h3')?.textContent || '';
+                    lightboxDescription.textContent = overlay.querySelector('p')?.textContent || '';
+                    lightboxCategory.textContent = overlay.querySelector('.gallery-category')?.textContent || '';
+                }
+                
+                this.updateNavigationButtons();
+            }
+            
+            updateNavigationButtons() {
+                const prevBtn = document.getElementById('lightbox-prev');
+                const nextBtn = document.getElementById('lightbox-next');
+                
+                prevBtn.disabled = this.currentLightboxIndex === 0;
+                nextBtn.disabled = this.currentLightboxIndex === this.galleryItems.length - 1;
+            }
+            
+            showPrevious() {
+                if (this.currentLightboxIndex > 0) {
+                    this.currentLightboxIndex--;
+                    this.updateLightboxContent(this.galleryItems[this.currentLightboxIndex]);
+                }
+            }
+            
+            showNext() {
+                if (this.currentLightboxIndex < this.galleryItems.length - 1) {
+                    this.currentLightboxIndex++;
+                    this.updateLightboxContent(this.galleryItems[this.currentLightboxIndex]);
+                }
+            }
+            
+            handleLightboxKeyboard(e) {
+                const lightbox = document.getElementById('lightbox');
+                if (!lightbox.classList.contains('open')) return;
+                
+                switch (e.key) {
+                    case 'Escape':
+                        this.closeLightbox();
+                        break;
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        this.showPrevious();
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        this.showNext();
+                        break;
+                }
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            new GalleryApp();
+        });
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
