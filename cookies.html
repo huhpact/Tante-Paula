@@ -12,16 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.css">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
-    <link rel="shortcut icon" href="/images/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Tante Paula" />
-    <link rel="manifest" href="/images/site.webmanifest" />
-    <link rel="icon" href="/images/logo.png" type="image/x-icon">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+    
     <header class="header" id="header">
         <nav class="nav container">
             <div class="logo-container">
@@ -131,14 +125,14 @@
                     <div class="legal-nav">
                         <a href="impressum.html" class="btn btn-outline">Impressum</a>
                         <a href="privacy.html" class="btn btn-outline">Datenschutzerklärung</a>
-                        <a href="contact.html" class="btn btn-primary">Kontakt</a>
+                        <a href="contact.html" class="btn btn-outline">Kontakt</a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-   <footer class="footer" data-aos="fade-up">
+    <footer class="footer" data-aos="fade-up">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
@@ -186,35 +180,41 @@
     <style>
         .legal-page {
             padding: var(--space-4xl) 0;
-            background: var(--color-white);
+            background: linear-gradient(135deg, var(--color-lavender) 0%, var(--color-accent) 100%);
+            min-height: 100vh;
         }
         
         .legal-content {
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.7;
+            background: var(--color-white);
+            padding: var(--space-3xl);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
         }
         
         .legal-content h1 {
             color: var(--color-gray-800);
             margin-bottom: var(--space-2xl);
             text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
         }
         
         .legal-content h2 {
-            color: var(--color-gray-800);
+            color: var(--color-primary-dark);
             margin: var(--space-2xl) 0 var(--space-lg) 0;
             font-size: 1.5rem;
         }
         
         .legal-content h3 {
-            color: var(--color-gray-700);
+            color: var(--color-secondary-dark);
             margin: var(--space-xl) 0 var(--space-md) 0;
             font-size: 1.25rem;
         }
         
         .legal-content h4 {
-            color: var(--color-gray-700);
+            color: var(--color-primary-dark);
             margin: var(--space-lg) 0 var(--space-sm) 0;
             font-size: 1.125rem;
         }
@@ -235,12 +235,18 @@
         }
         
         .legal-content strong {
-            color: var(--color-gray-800);
+            color: var(--color-primary-dark);
+            font-weight: 600;
         }
         
         .legal-content a {
             color: var(--color-primary-dark);
-            font-weight: 500;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+        }
+        
+        .legal-content a:hover {
+            color: var(--color-secondary-dark);
         }
         
         .cookie-settings-panel {
@@ -249,12 +255,14 @@
             border-radius: var(--radius-lg);
             margin: var(--space-2xl) 0;
             border: 1px solid var(--color-gray-200);
+            box-shadow: var(--shadow-lg);
         }
         
         .cookie-settings-panel h3 {
             margin-bottom: var(--space-xl);
             text-align: center;
             color: var(--color-gray-800);
+            font-size: 1.5rem;
         }
         
         .cookie-category {
@@ -262,7 +270,14 @@
             padding: var(--space-lg);
             border-radius: var(--radius-md);
             margin-bottom: var(--space-lg);
-            border: 1px solid var(--color-gray-100);
+            border: 1px solid var(--color-gray-200);
+            transition: all var(--transition-normal);
+        }
+        
+        .cookie-category:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
         
         .cookie-category-header {
@@ -274,7 +289,8 @@
         
         .cookie-category h4 {
             margin: 0;
-            color: var(--color-gray-800);
+            color: var(--color-primary-dark);
+            font-weight: 600;
         }
         
         .cookie-category p {
@@ -342,16 +358,31 @@
             border-top: 1px solid var(--color-gray-200);
         }
         
+        .cookie-actions .btn {
+            min-width: 150px;
+            font-weight: 600;
+        }
+        
         .legal-nav {
             display: flex;
             gap: var(--space-lg);
             justify-content: center;
-            margin-top: var(--space-3xl);
-            padding-top: var(--space-2xl);
+            margin-top: var(--space-2xl);
+            padding-top: var(--space-xl);
             border-top: 1px solid var(--color-gray-200);
         }
         
+        .legal-nav .btn {
+            min-width: 150px;
+            font-weight: 600;
+        }
+        
         @media (max-width: 768px) {
+            .legal-content {
+                margin: var(--space-lg);
+                padding: var(--space-xl);
+            }
+            
             .cookie-actions,
             .legal-nav {
                 flex-direction: column;
