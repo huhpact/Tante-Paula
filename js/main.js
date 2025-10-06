@@ -1,5 +1,10 @@
 class TantePaulaApp {
     constructor() {
+        this.cookieSettings = {
+            essential: true,
+            analytics: false,
+            marketing: false
+        };
         this.lastScrollY = 0;
         this.ticking = false;
         this.heroCarousel = null;
@@ -25,14 +30,19 @@ class TantePaulaApp {
     setupEverything() {
         console.log('Setting up Tante Paula App');
         this.initializeLibraries();
+        this.initializeScrollProgress();
+        this.initializeParallax();
         this.initializeHeader();
         this.initializeMobileMenu();
         this.initializeHeroCarousel();
         this.setupEventListeners();
         this.initializeBackToTop();
         this.initializeCookieBanner();
-        this.initializeNewsletterForm();
         this.initializeAnimatedWords();
+        this.initializeGalleryAutoHover();
+        this.initializePartnersAnimation();
+        this.initializeStatsCounter();
+        this.initializeIntersectionObserver();
     }
     
     initializeLibraries() {
@@ -328,68 +338,361 @@ class TantePaulaApp {
     initializeCookieBanner() {
         this.cookieBanner = document.getElementById('cookie-banner');
         const acceptButton = document.getElementById('cookie-accept');
+        const essentialButton = document.getElementById('cookie-essential');
         const settingsButton = document.getElementById('cookie-settings');
         
-        if (!localStorage.getItem('cookiesAccepted') && this.cookieBanner) {
+        const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+        if (!cookiesAccepted) {
             setTimeout(() => {
                 this.showCookieBanner();
             }, 1000);
         }
         
         if (acceptButton) {
-            acceptButton.addEventListener('click', () => this.acceptCookies());
+            acceptButton.addEventListener('click', () => {
+                this.acceptAllCookies();
+                this.hideCookieBanner();
+            });
+        }
+        
+        if (essentialButton) {
+            essentialButton.addEventListener('click', () => {
+                this.acceptEssentialCookies();
+                this.hideCookieBanner();
+            });
         }
         
         if (settingsButton) {
-            settingsButton.addEventListener('click', () => this.showCookieSettings());
+            settingsButton.addEventListener('click', () => {
+                this.showCookieSettings();
+            });
         }
     }
     
     showCookieBanner() {
         if (this.cookieBanner) {
-            this.cookieBanner.classList.add('visible');
+            this.cookieBanner.classList.add('show');
             this.cookieBanner.setAttribute('aria-hidden', 'false');
         }
     }
     
     hideCookieBanner() {
         if (this.cookieBanner) {
-            this.cookieBanner.classList.remove('visible');
+            this.cookieBanner.classList.remove('show');
             this.cookieBanner.setAttribute('aria-hidden', 'true');
         }
     }
     
-    acceptCookies() {
-        localStorage.setItem('cookiesAccepted', 'true');
-        this.hideCookieBanner();
-        console.log('Cookies accepted');
+    acceptAllCookies() {
+        this.cookieSettings = {
+            essential: true,
+            analytics: true,
+            marketing: true
+        };
+        localStorage.setItem('cookiesAccepted', 'all');
+        localStorage.setItem('cookieSettings', JSON.stringify(this.cookieSettings));
+        console.log('All cookies accepted');
+    }
+    
+    acceptEssentialCookies() {
+        this.cookieSettings = {
+            essential: true,
+            analytics: false,
+            marketing: false
+        };
+        localStorage.setItem('cookiesAccepted', 'essential');
+        localStorage.setItem('cookieSettings', JSON.stringify(this.cookieSettings));
+        console.log('Essential cookies accepted');
     }
     
     showCookieSettings() {
-        window.location.href = 'cookies.html';
+        // Create a modal for cookie settings
+        const modal = document.createElement('div');
+        modal.className = 'cookie-modal';
+        modal.innerHTML = `
+            <div class="cookie-modal-content">
+                <h3>Cookie-Einstellungen</h3>
+                <div class="cookie-option">
+                    <label>
+                        <input type="checkbox" checked disabled> Notwendige Cookies
+                        <span>Diese Cookies sind für die Grundfunktionen der Website erforderlich.</span>
+                    </label>
+                </div>
+                <div class="cookie-option">
+                    <label>
+                        <input type="checkbox" id="analytics-cookies"> Analyse-Cookies
+                        <span>Helfen uns zu verstehen, wie Besucher unsere Website nutzen.</span>
+                    </label>
+                </div>
+                <div class="cookie-option">
+                    <label>
+                        <input type="checkbox" id="marketing-cookies"> Marketing-Cookies
+                        <span>Werden verwendet, um personalisierte Werbung anzuzeigen.</span>
+                    </label>
+                </div>
+                <div class="cookie-modal-actions">
+                    <button class="btn btn-primary" id="save-settings">Einstellungen speichern</button>
+                    <button class="btn btn-secondary" id="close-modal">Schließen</button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        modal.classList.add('show');
+        
+        // Handle modal interactions
+        document.getElementById('save-settings').addEventListener('click', () => {
+            const analytics = document.getElementById('analytics-cookies').checked;
+            const marketing = document.getElementById('marketing-cookies').checked;
+            
+            this.cookieSettings = {
+                essential: true,
+                analytics,
+                marketing
+            };
+            
+            localStorage.setItem('cookiesAccepted', 'custom');
+            localStorage.setItem('cookieSettings', JSON.stringify(this.cookieSettings));
+            
+            document.body.removeChild(modal);
+            this.hideCookieBanner();
+        });
+        
+        document.getElementById('close-modal').addEventListener('click', () => {
+            document.body.removeChild(modal);
+        });
+        
+        // Close modal on backdrop click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                document.body.removeChild(modal);
+            }
+        });
     }
     
     initializeNewsletterForm() {
         const form = document.getElementById('newsletter-form');
         
         if (form) {
-            form.addEventListener('submit', (e) => this.handleNewsletterSubmit(e));
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const emailInput = form.querySelector('input[type="email"]');
+                const submitButton = form.querySelector('button[type="submit"]');
+                const email = emailInput.value.trim();
+                
+                if (!this.isValidEmail(email)) {
+                    this.showNotification('Bitte geben Sie eine gültige E-Mail-Adresse ein.', 'error');
+                    return;
+                }
+                
+                // Simulate form submission
+                const originalText = submitButton.textContent;
+                submitButton.textContent = 'Wird angemeldet...';
+                submitButton.disabled = true;
+                
+                setTimeout(() => {
+                    this.showNotification('Vielen Dank! Sie wurden erfolgreich für unseren Newsletter angemeldet.', 'success');
+                    emailInput.value = '';
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }, 1500);
+            });
         }
     }
     
-    handleNewsletterSubmit(e) {
-        e.preventDefault();
+    initializeAnimatedWords() {
+        const animatedWords = document.querySelectorAll('.animated-word');
         
-        const formData = new FormData(e.target);
-        const email = formData.get('email') || e.target.querySelector('input[type="email"]').value;
+        animatedWords.forEach((word, index) => {
+            const delay = index * 200;
+            word.style.setProperty('--animation-delay', `${delay}ms`);
+        });
+    }
+    
+    // Gallery Auto Hover Effect
+    initializeGalleryAutoHover() {
+        const galleryItems = document.querySelectorAll('.gallery-item');
         
-        if (!this.isValidEmail(email)) {
-            this.showNotification('Bitte geben Sie eine gültige E-Mail-Adresse ein.', 'error');
-            return;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Start auto hover sequence when gallery comes into view
+                    this.startGallerySequence(galleryItems);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const gallerySection = document.querySelector('#gallery-section');
+        if (gallerySection) {
+            observer.observe(gallerySection);
+        }
+    }
+    
+    startGallerySequence(items) {
+        let currentIndex = 0;
+        
+        const showNext = () => {
+            // Remove active class from all items
+            items.forEach(item => item.classList.remove('active'));
+            
+            // Add active class to current item
+            if (items[currentIndex]) {
+                items[currentIndex].classList.add('active');
+            }
+            
+            currentIndex = (currentIndex + 1) % items.length;
+        };
+        
+        // Start immediately
+        showNext();
+        
+        // Continue sequence every 2 seconds
+        const interval = setInterval(showNext, 2000);
+        
+        // Stop sequence after one full cycle
+        setTimeout(() => {
+            clearInterval(interval);
+            items.forEach(item => item.classList.remove('active'));
+        }, items.length * 2000);
+    }
+    
+    // Partners Animation
+    initializePartnersAnimation() {
+        const partnerItems = document.querySelectorAll('.partner-item');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    
+                    partnerItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(30px)';
+                            item.style.transition = 'all 0.6s ease-out';
+                            
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 100);
+                        }, index * 200);
+                    });
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        const partnersSection = document.querySelector('#partners-section');
+        if (partnersSection) {
+            observer.observe(partnersSection);
         }
         
-        this.showNotification('Vielen Dank! Sie wurden erfolgreich angemeldet.', 'success');
-        e.target.reset();
+        partnerItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const name = item.getAttribute('data-name');
+                this.showPartnerTooltip(item, name);
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                this.hidePartnerTooltip(item);
+            });
+        });
+    }
+    
+    showPartnerTooltip(element, name) {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'partner-tooltip';
+        tooltip.textContent = `Partner seit 2020 - ${name}`;
+        
+        element.style.position = 'relative';
+        element.appendChild(tooltip);
+    }
+    
+    hidePartnerTooltip(element) {
+        const tooltip = element.querySelector('.partner-tooltip');
+        if (tooltip) {
+            tooltip.remove();
+        }
+    }
+    
+    initializeScrollProgress() {
+        const progressBar = document.getElementById('scroll-progress');
+
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+    }
+
+    initializeParallax() {
+        const parallaxElements = document.querySelectorAll('.parallax-element');
+
+        window.addEventListener('scroll', () => {
+            parallaxElements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const scrolled = window.scrollY;
+                const rate = scrolled * 0.3;
+
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    element.style.transform = `translateY(${rate - rect.top * 0.1}px)`;
+                }
+            });
+        });
+    }
+
+    initializeStatsCounter() {
+        const statNumbers = document.querySelectorAll('.stat-number');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    this.animateCounter(entry.target, target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(stat => observer.observe(stat));
+    }
+    
+    animateCounter(element, target) {
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current);
+        }, 40);
+    }
+    
+    initializeIntersectionObserver() {
+        const animatedElements = document.querySelectorAll('.about-card, .contact-item, .testimonial-card, .gallery-item');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(30px)';
+                    entry.target.style.transition = 'all 0.6s ease-out';
+                    
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        animatedElements.forEach(el => observer.observe(el));
     }
     
     isValidEmail(email) {
@@ -402,35 +705,33 @@ class TantePaulaApp {
         notification.className = `notification notification-${type}`;
         notification.innerHTML = `
             <span>${message}</span>
-            <button class="notification-close" aria-label="Schließen">
-                <i data-lucide="x"></i>
-            </button>
+            <button class="notification-close" aria-label="Schließen">×</button>
         `;
         
         const styles = `
             .notification {
                 position: fixed;
-                top: var(--space-xl);
-                right: var(--space-xl);
-                background: var(--color-white);
-                color: var(--color-gray-800);
-                padding: var(--space-lg);
-                border-radius: var(--radius-lg);
-                box-shadow: var(--shadow-xl);
-                border-left: 4px solid var(--color-primary);
-                z-index: var(--z-toast);
+                top: 2rem;
+                right: 2rem;
+                background: white;
+                color: #1f2937;
+                padding: 1rem 1.5rem;
+                border-radius: 0.75rem;
+                box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+                border-left: 4px solid #6366f1;
+                z-index: 1000;
                 transform: translateX(100%);
-                transition: transform var(--transition-normal);
+                transition: transform 0.3s ease-out;
                 display: flex;
                 align-items: center;
-                gap: var(--space-md);
+                gap: 1rem;
                 max-width: 400px;
             }
             .notification.notification-success {
-                border-left-color: var(--color-secondary);
+                border-left-color: #10b981;
             }
             .notification.notification-error {
-                border-left-color: #EF4444;
+                border-left-color: #ef4444;
             }
             .notification.show {
                 transform: translateX(0);
@@ -439,13 +740,14 @@ class TantePaulaApp {
                 background: none;
                 border: none;
                 cursor: pointer;
-                padding: var(--space-xs);
-                border-radius: var(--radius-sm);
-                transition: background-color var(--transition-fast);
+                padding: 0.25rem;
+                border-radius: 0.25rem;
+                transition: background-color 0.15s ease-out;
                 flex-shrink: 0;
+                font-size: 1.25rem;
             }
             .notification-close:hover {
-                background-color: var(--color-gray-100);
+                background-color: #f3f4f6;
             }
         `;
         
@@ -457,10 +759,6 @@ class TantePaulaApp {
         }
         
         document.body.appendChild(notification);
-        
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
         
         setTimeout(() => {
             notification.classList.add('show');
@@ -483,15 +781,6 @@ class TantePaulaApp {
                 notification.parentNode.removeChild(notification);
             }
         }, 300);
-    }
-    
-    initializeAnimatedWords() {
-        const animatedWords = document.querySelectorAll('.animated-word');
-        
-        animatedWords.forEach(word => {
-            const delay = word.getAttribute('data-delay') || 0;
-            word.style.setProperty('--animation-delay', `${delay}ms`);
-        });
     }
 }
 
