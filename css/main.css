@@ -222,7 +222,6 @@ a:hover, a:focus {
     background: var(--color-gray-200);
 }
 
-/* Cookie Banner */
 .cookie-banner {
     position: fixed;
     bottom: 0;
@@ -2146,7 +2145,6 @@ button:focus,
     transition: width 0.1s ease-out;
 }
 
-/* Parallax Effect */
 .parallax-image {
     overflow: hidden;
 }
@@ -2155,7 +2153,6 @@ button:focus,
     transition: transform 0.3s ease-out;
 }
 
-/* Features Highlight Section */
 .features-highlight {
     background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-white) 100%);
     position: relative;
@@ -2352,11 +2349,11 @@ button:focus,
     }
 
     .hero-title {
-        font-size: clamp(2rem, 5.5vw, 3rem);
+        font-size: clamp(4rem, 6.5vw, 4rem);
     }
 
     .hero-subtitle {
-        font-size: clamp(0.875rem, 1.8vw, 1rem);
+        font-size: clamp(1.2rem, 1.8vw, 1rem);
         margin-bottom: var(--space-xl);
     }
 
