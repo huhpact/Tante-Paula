@@ -13,7 +13,10 @@ class TantePaulaApp {
         this.mobileSidebar = null;
         this.mobileSidebarClose = null;
         this.mobileBackdrop = null;
-        
+        this.brandCarousel = null;
+        this.brandCarouselAutoplay = null;
+        this.brandCarouselPaused = false;
+
         this.init();
     }
     
@@ -43,6 +46,7 @@ class TantePaulaApp {
         this.initializePartnersAnimation();
         this.initializeStatsCounter();
         this.initializeIntersectionObserver();
+        this.initializeBrandCarousel();
     }
     
     initializeLibraries() {
@@ -406,7 +410,6 @@ class TantePaulaApp {
     }
     
     showCookieSettings() {
-        // Create a modal for cookie settings
         const modal = document.createElement('div');
         modal.className = 'cookie-modal';
         modal.innerHTML = `
@@ -440,7 +443,6 @@ class TantePaulaApp {
         document.body.appendChild(modal);
         modal.classList.add('show');
         
-        // Handle modal interactions
         document.getElementById('save-settings').addEventListener('click', () => {
             const analytics = document.getElementById('analytics-cookies').checked;
             const marketing = document.getElementById('marketing-cookies').checked;
@@ -462,7 +464,7 @@ class TantePaulaApp {
             document.body.removeChild(modal);
         });
         
-        // Close modal on backdrop click
+        
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 document.body.removeChild(modal);
@@ -485,8 +487,7 @@ class TantePaulaApp {
                     this.showNotification('Bitte geben Sie eine gültige E-Mail-Adresse ein.', 'error');
                     return;
                 }
-                
-                // Simulate form submission
+
                 const originalText = submitButton.textContent;
                 submitButton.textContent = 'Wird angemeldet...';
                 submitButton.disabled = true;
@@ -510,14 +511,13 @@ class TantePaulaApp {
         });
     }
     
-    // Gallery Auto Hover Effect
     initializeGalleryAutoHover() {
         const galleryItems = document.querySelectorAll('.gallery-item');
         
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Start auto hover sequence when gallery comes into view
+                  
                     this.startGallerySequence(galleryItems);
                     observer.unobserve(entry.target);
                 }
@@ -534,31 +534,25 @@ class TantePaulaApp {
         let currentIndex = 0;
         
         const showNext = () => {
-            // Remove active class from all items
             items.forEach(item => item.classList.remove('active'));
             
-            // Add active class to current item
             if (items[currentIndex]) {
                 items[currentIndex].classList.add('active');
             }
             
             currentIndex = (currentIndex + 1) % items.length;
         };
-        
-        // Start immediately
+
         showNext();
         
-        // Continue sequence every 2 seconds
         const interval = setInterval(showNext, 2000);
         
-        // Stop sequence after one full cycle
         setTimeout(() => {
             clearInterval(interval);
             items.forEach(item => item.classList.remove('active'));
         }, items.length * 2000);
     }
     
-    // Partners Animation
     initializePartnersAnimation() {
         const partnerItems = document.querySelectorAll('.partner-item');
         
@@ -601,21 +595,6 @@ class TantePaulaApp {
         });
     }
     
-    showPartnerTooltip(element, name) {
-        const tooltip = document.createElement('div');
-        tooltip.className = 'partner-tooltip';
-        tooltip.textContent = `Partner seit 2020 - ${name}`;
-        
-        element.style.position = 'relative';
-        element.appendChild(tooltip);
-    }
-    
-    hidePartnerTooltip(element) {
-        const tooltip = element.querySelector('.partner-tooltip');
-        if (tooltip) {
-            tooltip.remove();
-        }
-    }
     
     initializeScrollProgress() {
         const progressBar = document.getElementById('scroll-progress');
@@ -674,24 +653,26 @@ class TantePaulaApp {
     
     initializeIntersectionObserver() {
         const animatedElements = document.querySelectorAll('.about-card, .contact-item, .testimonial-card, .gallery-item');
-        
+
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+        });
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '0';
-                    entry.target.style.transform = 'translateY(30px)';
-                    entry.target.style.transition = 'all 0.6s ease-out';
-                    
                     setTimeout(() => {
                         entry.target.style.opacity = '1';
                         entry.target.style.transform = 'translateY(0)';
                     }, 100);
-                    
+
                     observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.2 });
-        
+
         animatedElements.forEach(el => observer.observe(el));
     }
     
@@ -782,6 +763,101 @@ class TantePaulaApp {
             }
         }, 300);
     }
+
+    initializeBrandCarousel() {
+        const brandsContainer = document.querySelector('.partners-grid');
+        if (!brandsContainer) return;
+
+        const partnerItems = Array.from(brandsContainer.querySelectorAll('.partner-item'));
+        if (partnerItems.length === 0) return;
+
+        const isMobile = window.innerWidth <= 768;
+        const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+        let initialCount = 12;
+        if (isMobile) {
+            initialCount = 6;
+        } else if (isTablet) {
+            initialCount = 8;
+        }
+
+        brandsContainer.className = 'partners-interactive-grid';
+        const parentSection = brandsContainer.parentElement;
+        brandsContainer.innerHTML = '';
+
+        partnerItems.forEach((item, index) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'partner-grid-item';
+            if (index >= initialCount) {
+                wrapper.classList.add('hidden-initially');
+            }
+            wrapper.style.animationDelay = `${index * 0.05}s`;
+
+            const clone = item.cloneNode(true);
+            wrapper.appendChild(clone);
+            brandsContainer.appendChild(wrapper);
+        });
+
+        if (partnerItems.length > initialCount) {
+            const buttonWrapper = document.createElement('div');
+            buttonWrapper.className = 'show-more-wrapper';
+
+            const showMoreBtn = document.createElement('button');
+            showMoreBtn.className = 'show-more-btn';
+            showMoreBtn.innerHTML = `
+                <span class="show-more-text">Alle Partner anzeigen</span>
+                <i data-lucide="chevron-down"></i>
+            `;
+
+            buttonWrapper.appendChild(showMoreBtn);
+            parentSection.appendChild(buttonWrapper);
+
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            showMoreBtn.addEventListener('click', () => {
+                const isExpanded = showMoreBtn.classList.contains('expanded');
+                const allItems = brandsContainer.querySelectorAll('.partner-grid-item');
+
+                if (!isExpanded) {
+                    allItems.forEach((item, index) => {
+                        if (index >= initialCount) {
+                            setTimeout(() => {
+                                item.classList.remove('hidden-initially');
+                            }, (index - initialCount) * 30);
+                        }
+                    });
+                    showMoreBtn.classList.add('expanded');
+                    showMoreBtn.querySelector('.show-more-text').textContent = 'Weniger anzeigen';
+                    showMoreBtn.querySelector('i').style.transform = 'rotate(180deg)';
+                } else {
+                    allItems.forEach((item, index) => {
+                        if (index >= initialCount) {
+                            item.classList.add('hidden-initially');
+                        }
+                    });
+                    showMoreBtn.classList.remove('expanded');
+                    showMoreBtn.querySelector('.show-more-text').textContent = 'Alle Partner anzeigen';
+                    showMoreBtn.querySelector('i').style.transform = 'rotate(0deg)';
+
+                    parentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        brandsContainer.querySelectorAll('.partner-grid-item').forEach(item => {
+            observer.observe(item);
+        });
+    }
+
 }
 
 let tantePaulaApp = null;
